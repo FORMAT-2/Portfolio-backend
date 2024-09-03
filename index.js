@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Message = require('./message.model');
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+dotenv.config();
+
 const app = express();
 
 app.use(express.json());
@@ -29,13 +32,13 @@ const sendMessage = async(req,res)=>{
         port: 465,
         secure: true,
         auth: {
-          user: "mk.408198@gmail.com",
-          pass: "wxcz kcpa btlb xgwv",
+          user: process.env.MAIL,
+          pass: process.env.PASS,
         },
       });
 
       const mailOptions = {
-        from: "mk.408198@gmail.com",
+        from: process.env.MAIL,
         to: mail,
         subject: "Automated response",
         text: "Thanks for messaging me, I will get back to you as soon as possible",
